@@ -15,7 +15,7 @@ public class ChessMatch {
 	// Construtor padrão -
 	public ChessMatch() {
 		board = new Board(8, 8); // nessa clase que determina o tamanho do tabuleiro da partida.
-		initialSetup(); //iniciar o setup da partida
+		initialSetup(); // iniciar o setup da partida
 	}
 
 	// Retorna a matriz de peças de xadrez correspondentes a essa partida
