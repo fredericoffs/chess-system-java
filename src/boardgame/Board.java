@@ -54,7 +54,7 @@ public class Board {
 			throw new BoardException("Position not on the Board.");
 		}
 		// se a peça não existir no tabuleiro, retornar null para a peça não existente.
-		if (piece(position) == null) {
+		if (!thereIsAPiece(position)) {
 			return null;
 		}
 		// peça auxiliar para remover a peça do tabuleiro salvando a peça que estava na
