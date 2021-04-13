@@ -33,6 +33,12 @@ public class ChessMatch {
 		return mat;
 	}
 
+	public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+		Position position = sourcePosition.toPosition();
+		validateSourcePosition(position);
+		return board.piece(position).possibleMoves();
+	}
+
 	// Método que realiza o movimento peça no tabuleiro retornando uma peça
 	// capturada se for o caso.
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
