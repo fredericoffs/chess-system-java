@@ -20,15 +20,15 @@ public class Program {
 			try {
 				UI.clearScreen();
 				// função para imprimir as peças dessa partida
-				UI.printBoard(chessMatch.getPieces());
+				UI.printMatch(chessMatch);
 
 				System.out.println();
 				System.out.print("Source: ");
 				ChessPosition source = UI.readChessPosition(sc);
-				
+
 				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
- 				UI.clearScreen();
- 				UI.printBoard(chessMatch.getPieces(), possibleMoves);
+				UI.clearScreen();
+				UI.printBoard(chessMatch.getChessMatch(), possibleMoves);
 
 				System.out.println();
 				System.out.print("Target: ");

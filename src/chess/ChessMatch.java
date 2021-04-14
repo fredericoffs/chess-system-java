@@ -10,18 +10,31 @@ import chess.pieces.Rook;
 
 public class ChessMatch {
 
+	private int turn;
+	private Color currentPlayer;
+
 	// partida de xadrez tem que ter um tabuleiro
 	private Board board;
 
 	// Construtor padrão -
 	public ChessMatch() {
 		board = new Board(8, 8); // nessa clase que determina o tamanho do tabuleiro da partida.
+		turn = 1;
+		currentPlayer = Color.WHITE;
 		initialSetup(); // iniciar o setup da partida
+	}
+
+	public int getTurn() {
+		return turn;
+	}
+
+	public Color getCurrentPlayer() {
+		return currentPlayer;
 	}
 
 	// Retorna a matriz de peças de xadrez correspondentes a essa partida
 	// (chessmatch)
-	public ChessPiece[][] getPieces() {
+	public ChessPiece[][] getChessMatch() {
 		// Para pegar na camada da partida e não na camada do tabuleiro
 		ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
 		for (int i = 0; i < board.getRows(); i++) {
@@ -53,6 +66,9 @@ public class ChessMatch {
 		// makeMove - realizar o movimento da peça de origem com destino
 		Piece capturedPiece = makeMove(source, target);
 
+		// trocar o turno para o próximo jogador
+		nextTurn();
+
 		// downcast
 		return (ChessPiece) capturedPiece;
 	}
@@ -68,6 +84,13 @@ public class ChessMatch {
 		if (!board.thereIsAPiece(position)) {
 			throw new ChessException("There is no piece on source position.");
 		}
+
+		// Verificar se a peça que irá mover é do jogador atual, fazer downcast para a
+		// classe chesspiece pois o getColor é um método dela
+		if (currentPlayer != ((ChessPiece) board.piece(position)).getColor()) {
+			throw new ChessException("The chosen piece is not yours.");
+		}
+
 		// se não tiver nenhum movimento possível
 		if (!board.piece(position).isThereAnyPossibleMove()) {
 			throw new ChessException("There is no possible moves for the chosen piece.");
@@ -79,6 +102,13 @@ public class ChessMatch {
 		if (!board.piece(source).possibleMove(target)) {
 			throw new ChessException("The chosen piece can't move to target position.");
 		}
+	}
+
+	private void nextTurn() {
+		// incrementa o turno da partida
+		turn++;
+		// muda o jogador da partida
+		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 
 	// recebe as coordenadas da peça na camada do xadrez
