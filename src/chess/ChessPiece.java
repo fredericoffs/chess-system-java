@@ -17,6 +17,16 @@ public abstract class ChessPiece extends Piece {
 		return color;
 	}
 
+	/*
+	 * Como a propriedade position da classe Piece é protected n pode ser acessada
+	 * direta pela app a posição do tipo matriz, deve acessar pelo formato do
+	 * xadrez, letra + nro.
+	 */
+
+	public ChessPosition getChessPosition() {
+		return ChessPosition.fromPosition(position);
+	}
+
 	protected boolean isThereOpponentPiece(Position position) {
 		ChessPiece p = (ChessPiece) getBoard().piece(position);
 		return p != null && p.getColor() != color;
