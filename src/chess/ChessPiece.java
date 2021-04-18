@@ -22,6 +22,14 @@ public abstract class ChessPiece extends Piece {
 		return moveCount;
 	}
 
+	protected void increaseMoveCount() {
+		moveCount++;
+	}
+	
+	protected void decreaseMoveCount() {
+		moveCount--;
+	}
+
 	/*
 	 * Como a propriedade position da classe Piece é protected n pode ser acessada
 	 * direta pela app a posição do tipo matriz, deve acessar pelo formato do
@@ -30,14 +38,6 @@ public abstract class ChessPiece extends Piece {
 
 	public ChessPosition getChessPosition() {
 		return ChessPosition.fromPosition(position);
-	}
-
-	protected void increaseMoveCount() {
-		moveCount++;
-	}
-
-	protected void decreaseMoveCount() {
-		moveCount--;
 	}
 
 	protected boolean isThereOpponentPiece(Position position) {
